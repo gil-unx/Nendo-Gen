@@ -5,15 +5,15 @@ namespace KPDREPACKER
     class KPDREPACK
     {
 
-        public byte[] magic;
-        public int version;
-        public long kpdSize;
-        public long paddingSize;
-        public long foldersOffset;
-        public long foldersSize;
-        public long datasOffset;
-        public long datasSize;
-        public FOLDERREPACK folder;
+        private byte[] magic;
+        private int version;
+        private long kpdSize;
+        private long paddingSize;
+        private long foldersOffset;
+        private long foldersSize;
+        private long datasOffset;
+        private long datasSize;
+        private FOLDERREPACK folder;
 
 
         public KPDREPACK(string tocName)
@@ -50,19 +50,6 @@ namespace KPDREPACKER
             writer.Write(newDatas);
             writer.Flush();
             writer.Close();
-            System.Console.WriteLine(kpdName);
-
-
-
-
-
-
-
-
-
-
-
         }
-
     }
 }
