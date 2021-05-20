@@ -28,12 +28,7 @@ namespace KPDREPACKER
 				string name = reader.GetUtf8();
 				names.Add(name);
 				reader.ReadPadding(0x50);
-				
-				
-			
 			}
-			
-			
 		}
 
 		public byte[] GETNEWINFOS(long padding)
