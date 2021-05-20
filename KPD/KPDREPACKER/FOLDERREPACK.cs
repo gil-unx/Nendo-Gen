@@ -88,7 +88,7 @@ namespace KPDREPACKER
                         }
 						FILE file = new FILE();
 						FileStream fileStream = new FileStream(folderName + "/" + infos.names[i], FileMode.Open, FileAccess.Read);
-                        			Console.WriteLine(folderName + "/" + infos.names[i]);
+                        Console.WriteLine(folderName + "/" + infos.names[i]);
 						infos.sizes[i] = fileStream.Length;
 						infos.offsets[i] = datasWriter.BaseStream.Position;
 						byte[] fileData = new byte[fileStream.Length];
