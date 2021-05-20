@@ -38,12 +38,12 @@ namespace KPDREPACKER
             byte[] newDatas = folder.datasBuff.ToArray();
             writer.Write(magic);
             writer.Write(version);
-            writer.Write(newDatas.Length+ datasOffset);//new
+            writer.Write(newDatas.Length+ datasOffset);//new kpd size
             writer.Write(paddingSize);
             writer.Write(foldersOffset);
             writer.Write(foldersSize);
             writer.Write(datasOffset);
-            writer.Write(folder.datasBuff.Length);//new
+            writer.Write(folder.datasBuff.Length);//new datas size
             writer.WritePadding((int)foldersOffset, 0);
             writer.Write(newFolders);
             writer.WritePadding((int)paddingSize, 0);
