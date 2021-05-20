@@ -18,8 +18,8 @@ namespace KPDREPACKER
 
         public KPDREPACK(string tocName)
         {
-            string kpdName = Path.GetDirectoryName(tocName) + "\\" + Path.GetFileNameWithoutExtension(tocName);
-            string outFolder = Path.GetDirectoryName(tocName) + "\\" + Path.GetFileNameWithoutExtension(kpdName)+ "_UNPACK";
+            string kpdName = Path.GetDirectoryName(tocName) + "/" + Path.GetFileNameWithoutExtension(tocName);
+            string outFolder = Path.GetDirectoryName(tocName) + "/" + Path.GetFileNameWithoutExtension(kpdName)+ "_UNPACK";
             FileStream fileStream = new FileStream(tocName, FileMode.Open, FileAccess.Read);
             FileStream outStream = new FileStream(kpdName, FileMode.Create, FileAccess.Write);
             BinaryReader toc = new BinaryReader(fileStream);
