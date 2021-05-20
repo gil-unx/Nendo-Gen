@@ -11,15 +11,15 @@ namespace KPDUNPACKER
     class KPDUNPACK 
     {
 
-    	public byte[] magic;
-    	public int version;
-    	public long kpdSize;
-    	public long paddingSize;
-    	public long foldersOffset;
-    	public long foldersSize;
+    	private byte[] magic;
+    	private int version;
+    	private long kpdSize;
+    	private long paddingSize;
+    	private long foldersOffset;
+    	private long foldersSize;
     	
-    	public long datasOffset;
-    	public long datasSize;
+    	private long datasOffset;
+    	private long datasSize;
     	public FOLDERUNPACK folder;
         public BR datas;
     	
@@ -52,15 +52,12 @@ namespace KPDUNPACKER
             {
                 if (node.folder != null)
                 {
-
                     //null directory
-
                 }
                 else
                 {
                     Directory.CreateDirectory(Path.GetDirectoryName(node.file.name));
                     Console.WriteLine("Extract : {0}", node.file.name);
-                   
                     FileStream outputFile = new FileStream(node.file.name, FileMode.Create, FileAccess.Write);
                     outputFile.Write(datas.GetBytes(node.file.refOffset + node.file.offset, (int)node.file.size), 0, (int)node.file.size);
                     outputFile.Flush();
@@ -70,8 +67,6 @@ namespace KPDUNPACKER
                         KPDUNPACK kpdLite = new KPDUNPACK(node.file.name);
 
                     }
-
-
                 }
             }
         }
