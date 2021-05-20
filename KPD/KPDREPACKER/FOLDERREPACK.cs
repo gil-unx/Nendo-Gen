@@ -51,7 +51,6 @@ namespace KPDREPACKER
 			datasWriter = new BW(datasBuff);
 			
 			List<byte[]> newFolders = new List<byte[]>();
-			List<byte[]> newDatas = new List<byte[]>();
 			long chunkDataOffset = dataOffset;
 			for (int i = 0; i < count; i++)
 			{
