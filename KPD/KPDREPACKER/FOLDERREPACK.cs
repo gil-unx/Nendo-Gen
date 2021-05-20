@@ -18,7 +18,7 @@ namespace KPDREPACKER
 		public short count;
 		public byte[] unk;
 		public INFOS infos;
-		BinaryReader reader;
+		private BinaryReader reader;
 		public MemoryStream datasBuff = new MemoryStream();
 		public BW datasWriter;
 		public  FOLDERREPACK(MemoryStream buff, string parent)
