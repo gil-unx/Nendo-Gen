@@ -76,7 +76,6 @@ namespace KPDREPACKER
 						break;
 				}
 			}
-			folderWriter.WritePadding(0x800,0);
 			folderWriter.Write(location);
 			folderWriter.Write(infosOffset);
 			folderWriter.Write(infosSize);
