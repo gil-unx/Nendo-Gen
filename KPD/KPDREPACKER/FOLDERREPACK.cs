@@ -21,13 +21,8 @@ namespace KPDREPACKER
 		BinaryReader reader;
 		public MemoryStream datasBuff = new MemoryStream();
 		public BW datasWriter;
-
-
-		public List<RECORDREPACK> records = new List<RECORDREPACK>();
-
 		public  FOLDERREPACK(MemoryStream buff, string parent)
 		{
-
 			folderName = parent;
 			reader = new BinaryReader(buff);
 			location = reader.ReadInt32();
@@ -41,7 +36,6 @@ namespace KPDREPACKER
 			unk = reader.ReadBytes((int)infosOffset - 0x32);
 			infos = new INFOS(new MemoryStream(reader.ReadBytes((int)infosSize)), count);
 			
-
 		}
 
 		public byte[] Repack(long dataOffset,long padding)
@@ -49,44 +43,24 @@ namespace KPDREPACKER
 			MemoryStream buff = new MemoryStream();
 			BW folderWriter = new BW(buff);
 			datasWriter = new BW(datasBuff);
-			
 			List<byte[]> newFolders = new List<byte[]>();
 			long chunkDataOffset = dataOffset;
 			for (int i = 0; i < count; i++)
 			{
-				
-				RECORDREPACK record = new RECORDREPACK();
 				switch (infos.locations[i])
 				{
 					case 0:
 						chunkDataOffset = datasWriter.BaseStream.Position;
 						FOLDERREPACK folder = new FOLDERREPACK(new MemoryStream(reader.ReadBytes((int)infos.sizes[i])), folderName + "/" + infos.names[i]);
-						record.folder = folder;
-						foreach (var chunk in record.folder.records)
-						{
-							records.Add(chunk);
-							
-
-						}
-						records.Add(record);
 						newFolders.Add(folder.Repack(chunkDataOffset+dataOffset,padding));
 						datasWriter.Write(folder.datasBuff.ToArray());
 						chunkDataOffset += folder.datasBuff.Length;
-
-
-
-
-
-
-
-
 						break;
 					case 1:
 						if(Path.GetExtension(infos.names[i]) == ".kpd")
                         {
 							KPDREPACK kpdLite = new KPDREPACK(folderName + "/" + infos.names[i]+".toc");
                         }
-						FILE file = new FILE();
 						FileStream fileStream = new FileStream(folderName + "/" + infos.names[i], FileMode.Open, FileAccess.Read);
                         Console.WriteLine(folderName + "/" + infos.names[i]);
 						infos.sizes[i] = fileStream.Length;
@@ -95,20 +69,11 @@ namespace KPDREPACKER
 						fileStream.Read(fileData, 0, (int)fileData.Length);
 						datasWriter.Write(fileData);
 						datasWriter.WritePadding((int)padding, 0);//padding
-						file.name = folderName + "/" + infos.names[i];
-						file.offset = infos.offsets[i];
-						file.size = infos.sizes[i];
-						record.file = file;
-						records.Add(record);
 						break;
 					default:
 						Console.WriteLine("exception");
 						Console.ReadKey();
 						break;
-
-
-
-
 				}
 			}
 			folderWriter.WritePadding(0x800,0);
@@ -126,17 +91,7 @@ namespace KPDREPACKER
             {
 				folderWriter.Write(newFolder);
             }
-
-
-
-
-
 			return buff.ToArray();
-
-
 		}
-
-
-
 	}
 }
