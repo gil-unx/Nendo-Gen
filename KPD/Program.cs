@@ -11,9 +11,21 @@ namespace NENDOROID
     {
         static void Main(string[] args)
         {
-            //KPDUNPACK kpd = new KPDUNPACK("C:\\Users\\Administrator\\Desktop\\NENDOROID\\DATAPACK.KPD");
-            KPDREPACK kpd = new KPDREPACK("C:\\Users\\Administrator\\Desktop\\NENDOROID\\DATAPACK.KPD.toc");
-            //KPDREPACK kpd = new KPDREPACK("C:\\Users\\Administrator\\Desktop\\NENDOROID\\DATAPACK_UNPACK\\pkdata\\dance.kpd.toc");
+            string mode = "";
+            string input = "";
+            Console.WriteLine("KPD unpacker by Gil_Unx");
+            Console.WriteLine("------------------------------------");
+            if (args.Length < 2) { Console.WriteLine("ERROR: Argument tidak spesifik\n\nExtract: KPDEX -x <*.KPD>\n\nRepack kpd: KPDEX -c <*.KPD.toc>"); return; }
+            mode = args[0];
+            input = args[1];
+            if (mode == "-x")
+            {
+                KPDUNPACK kpd = new KPDUNPACK(input);
+            }
+            if (mode == "-c")
+            {
+                KPDREPACK kpd = new KPDREPACK(input);
+            }
 
         }
 
